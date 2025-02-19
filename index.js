@@ -1,5 +1,5 @@
 // imports
-const deasync = require('deasync');
+const deasync = require('@kaciras/deasync');
 const readFileSync = require('fs').readFileSync;
 const resolve = require('path').resolve;
 const types = require('node-sass').types;
