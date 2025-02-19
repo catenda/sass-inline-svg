@@ -1,5 +1,4 @@
 // imports
-const deasync = require('@kaciras/deasync');
 const readFileSync = require('fs').readFileSync;
 const resolve = require('path').resolve;
 const types = require('node-sass').types;
@@ -10,7 +9,7 @@ const selectOne = selectAll.selectOne;
 const serialize = require('dom-serializer');
 const svgToDataUri = require('mini-svg-data-uri');
 const svgo = new (require('svgo'))();
-const optimize = deasync(optimizeAsync);
+const optimize = optimizeAsync;
 
 const defaultOptions = { optimize: false, encodingFormat: 'base64' };
 
@@ -27,7 +26,7 @@ module.exports = inliner;
 function inliner(base, opts) {
   opts = assign({}, defaultOptions, opts);
 
-  return function(path, selectors) {
+  return function (path, selectors) {
     let content = readFileSync(resolve(base, path.getValue()));
 
     if (selectors && selectors.getLength && selectors.getLength()) content = changeStyle(content, selectors);
@@ -72,11 +71,11 @@ function changeStyle(source, selectors) {
     throw Error('Invalid svg file');
   }
 
-  Object.keys(selectors).forEach(function(selector) {
+  Object.keys(selectors).forEach(function (selector) {
     const elements = selectAll(selector, svg);
     let attribs = selectors[selector];
 
-    elements.forEach(function(element) {
+    elements.forEach(function (element) {
       assign(element.attribs, attribs);
     });
   });
@@ -120,7 +119,7 @@ function mapToObj(map) {
 function optimizeAsync(src, cb) {
   svgo
     .optimize(src)
-    .then(function(result) {
+    .then(function (result) {
       return cb(null, result);
     })
     .catch(cb);

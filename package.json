@@ -34,7 +34,6 @@
   },
   "homepage": "https://github.com/haithembelhaj/sass-inline-svg",
   "dependencies": {
-    "@kaciras/deasync": "^1.1.0",
     "css-select": "^1.2.0",
     "dom-serializer": "^0.1.0",
     "htmlparser2": "^3.9.0",
